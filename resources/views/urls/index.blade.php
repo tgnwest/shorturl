@@ -22,7 +22,7 @@
                                 <th>Full link</th>
                                 <th>Short link</th>
                                 <th>Count</th>
-                                <th>Shared</th>
+                                <th>Show on index page</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -36,7 +36,13 @@
                                         </a>
                                     </td>
                                     <td>{{$url->count}}</td>
-                                    <td>{{$url->isShared}}</td>
+                                    <td>
+                                        @if($url->isShared)
+                                            Yes
+                                        @else
+                                            No
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{route('share', $url->id)}}"><i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i></a>
                                         <a href="{{route('delete', $url->id)}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
