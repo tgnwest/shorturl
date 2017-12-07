@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UrlsController extends Controller
 {
@@ -28,6 +30,7 @@ class UrlsController extends Controller
      */
     public function home()
     {
+        Log::info('Showing index page');
         $urls = $this->url->getAllLinks();
         return view('home')->with('urls', $urls);
     }
@@ -39,6 +42,7 @@ class UrlsController extends Controller
      */
     public function index()
     {
+        Log::info('Showing user links page for user: '.Auth::id());
         $urls = $this->url->getAllUserLinks();
         return view('urls.index')->with('urls', $urls);
     }
@@ -50,6 +54,7 @@ class UrlsController extends Controller
      */
     public function create()
     {
+        Log::info('Showing the new short url form for user: '.Auth::id());
         return view('urls.create');
     }
 
@@ -61,7 +66,8 @@ class UrlsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->url->store($request);
+        $url = $this->url->store($request);
+        Log::info('Stored data with id: '.$url->id.' in db by user: '.Auth::id());
         return redirect('/urls')->with('status', 'Url successfully created!');
     }
 
@@ -74,6 +80,7 @@ class UrlsController extends Controller
     public function delete($id)
     {
         $this->url->deleteUrl($id);
+        Log::info('Deleted data with id: '.$id.' in db by user: '.Auth::id());
         return back()->with('status', 'Url successfully deleted!');
     }
 
@@ -86,6 +93,7 @@ class UrlsController extends Controller
     public function share($id)
     {
         $msg = $this->url->shareUrl($id);
+        Log::info($msg.' data with id: '.$id.' on index page by user: '.Auth::id());
         return back()->with('status', 'Url successfully '.$msg);
     }
 
