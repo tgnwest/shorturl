@@ -27,7 +27,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            Url::where('created_at', '>', Carbon::now()->addDays(29)->toDateString());
+            $urls = Url::where('created_at', '>', Carbon::now()->addDays(29)->toDateString())->get();
+            if ($urls) {
+                foreach ($urls as $url) {
+                    $url->delete();
+                }
+            }
         })->daily();
     }
 
