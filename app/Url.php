@@ -144,6 +144,12 @@ class Url extends Model
         }
     }
 
+    /**
+     * Redirect to full link
+     *
+     * @param Request $request
+     * @return bool
+     */
     public static function redirect(Request $request)
     {
         $short = substr(parse_url($request->url())['path'], 1);
@@ -151,6 +157,8 @@ class Url extends Model
         if (!$url)
             return false;
         else
+            $url->count++;
+            $url->save();
             return $url;
     }
 

@@ -89,9 +89,4 @@ class UrlsController extends Controller
         return back()->with('status', 'Url successfully '.$msg);
     }
 
-    public static function redirect()
-    {
-        dd('sdfsdf');
-    }
-
 }
