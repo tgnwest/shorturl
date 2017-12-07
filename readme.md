@@ -27,6 +27,13 @@ $ chmod -R 777 bootstrap/cache/
 - Application count amount of short url usage. 
 - Configuration via .env file
 - Logging system. All user actions are recorded in the log file storage/logs/laravel.log
+Example:
+```
+[2017-12-07 17:43:17] local.INFO: Showing user links page for user: 1  
+[2017-12-07 17:43:21] local.INFO: Deleted data with id: 7 in db by user: 1  
+[2017-12-07 17:43:21] local.INFO: Showing user links page for user: 1  
+[2017-12-07 17:53:20] local.INFO: Showing index page
+```
 -  Application remove origin-short url pair from DB on the 15th day after its creation
 Sets how many days to keep links in the database (default 15 days)
 ```
