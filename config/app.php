@@ -126,6 +126,12 @@ return [
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
+     * Deleting record after date
+     */
+
+    'daysBeforeDeleted' => env('DAYS_BEFORE_DELETED', 15),
+
+    /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------

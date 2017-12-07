@@ -16,7 +16,7 @@
                                 <label for="origin" class="col-md-4 control-label">Origin url *</label>
 
                                 <div class="col-md-6">
-                                    <input id="origin" type="text" class="form-control" name="origin" value="{{ old('origin') }}" required autofocus>
+                                    <input id="origin" type="text" class="form-control" name="origin" value="{{ old('origin') }}" placeholder="http://google.com" required autofocus>
 
                                     @if ($errors->has('origin'))
                                         <span class="help-block">
@@ -30,7 +30,7 @@
                                 <label for="short" class="col-md-4 control-label">Desired short url</label>
 
                                 <div class="col-md-6">
-                                    <input id="short" type="text" class="form-control" name="short" value="{{ old('short') }}">
+                                    <input id="short" type="text" class="form-control" name="short" value="{{ old('short') }}" placeholder="myName">
 
                                     @if ($errors->has('short'))
                                         <span class="help-block">
