@@ -36,6 +36,7 @@ class Url extends Model
         return Validator::make($data, [
             'origin' => 'required|active_url|string|max:255',
             'short' => 'max:50|unique:urls',
+            'user_id' => 'required'
         ]);
     }
 
@@ -82,6 +83,29 @@ class Url extends Model
     }
 
     /**
+     * Store new record in db
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function storeUrl(Request $request)
+    {
+        $data = $request->all();
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+
+            //pass validator errors as errors object for ajax response
+
+            return response()->json(['errors'=>$validator->errors()]);
+        }
+        if (!$request->short) {
+            $data['short'] = $this->generateShortLink();
+        }
+
+        return $this->create($data);
+    }
+
+    /**
      * Get all auth user links
      *
      * @return mixed
@@ -120,8 +144,13 @@ class Url extends Model
      */
     public function deleteUrl($id)
     {
-        $this->find($id)->delete();
-        return '';
+        $url = $this->find($id);
+        if ($url) {
+            $url->delete();
+            return 'deleted';
+        }
+
+        return 'not found';
     }
 
     /**

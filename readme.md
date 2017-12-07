@@ -1,7 +1,7 @@
-#ShortURL
+# ShortURL
 ## Install
 
-###requirements
+### requirements
 - PHP >= 7.0.0
 - OpenSSL PHP Extension
 - PDO PHP Extension
@@ -50,19 +50,19 @@ Request:
 ```
 
     origin = "http://google.com" - required
+    user_id = 1 - required
     short ="myName"
 
 ```
 Response:
 ```
 {
-
-  "user_id": "1",
-  "origin": "http://google.com",
-  "short": "http://url.com/dfdDFdf",
-  "count": 0,
-  "created_at": date
-
+    "origin": "http://google.com",
+    "user_id": "1",
+    "short": "G43WgUZD6k",
+    "updated_at": "2017-12-07 17:56:44",
+    "created_at": "2017-12-07 17:56:44",
+    "id": 8
 }
 ```
 error
@@ -83,26 +83,36 @@ GET /urls
 
 Response:
 ```
-{
-
-  "id": 1
-  "user_id": 1,
-  "origin": "http://google.com",
-  "short": "http://url.com/dfdDFdf",
-  "count": 0,
-  "created_at": date
-
-},
-{
-
-  "id": 2
-  "user_id": 2,
-  "origin": "http://google.com",
-  "short": "http://url.com/dfdDFdf",
-  "count": 0,
-  "created_at": date
-
-}
+[
+  {
+    "id": 5,
+    "user_id": 1,
+    "origin": "http://asdfasdfsd.com",
+    "short": "3HOSgns6hF",
+    "count": 1,
+    "isShared": 1,
+    "created_at": "2017-12-07 16:18:40",
+    "updated_at": "2017-12-07 16:30:37",
+    "user":{
+        "id": 1,
+        "name": "Alex",
+        "email": "tgnwest@gmail.com",
+        "created_at": "2017-12-07 14:42:27",
+        "updated_at": "2017-12-07 14:42:27"
+    }
+  },
+  {
+    "id": 6,
+    "user_id": 1,
+    "origin": "http://google.com",
+    "short": "sdgdfg",
+    "count": 0,
+    "isShared": 1,
+    "created_at": "2017-12-07 16:46:11",
+    "updated_at": "2017-12-07 16:46:11",
+    "user":{"id": 1, "name": "Alex", "email": "tgnwest@gmail.com", "created_at": "2017-12-07 14:42:27",…}
+  },
+]
 ```
 error
 ```
@@ -131,7 +141,7 @@ Response:
 error
 ```
 {
-  "data": "Not found",
+  "data": "Error msg",
   "status": "error"
 }
 ```
@@ -143,16 +153,14 @@ DELETE /urls/1
 Response:
 ```
 {
-  "data": "Url deleted",
-  "status": "OK"
+  "data": "Url deleted"
 
 }
 ```
 error
 ```
 {
-  "data": "Not found",
-  "status": "error"
+  "data": "Not found"
 }
 ```
 

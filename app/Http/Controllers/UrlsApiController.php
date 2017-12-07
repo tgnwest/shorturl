@@ -38,7 +38,7 @@ class UrlsApiController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($this->url->store($request));
+        return response()->json($this->url->storeUrl($request));
     }
 
     /**
@@ -61,6 +61,6 @@ class UrlsApiController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json($this->url->deleteUrl($id));
+        return response()->json(['data' => $this->url->deleteUrl($id)]);
     }
 }
