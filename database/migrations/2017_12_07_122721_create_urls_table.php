@@ -18,7 +18,8 @@ class CreateUrlsTable extends Migration
             $table->integer('user_id');
             $table->string('origin');
             $table->string('short')->unique();
-            $table->integer('count');
+            $table->integer('count')->default(0);
+            $table->boolean('isShared')->default(true);
             $table->timestamps();
         });
     }

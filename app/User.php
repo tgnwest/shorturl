@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the urls for the user .
+     */
+    public function urls()
+    {
+        return $this->hasMany('App\Url');
+    }
 }

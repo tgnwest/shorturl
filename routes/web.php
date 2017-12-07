@@ -14,10 +14,14 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'UrlsController@home')->name('index');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/home', 'UrlsController@index')->name('home');
+    Route::get('/urls', 'UrlsController@index')->name('home');
+    Route::get('/urls/create', 'UrlsController@create')->name('create');
+    Route::post('/urls/create', 'UrlsController@store')->name('create');
+    Route::get('/urls/{id}/delete', 'UrlsController@delete')->name('delete');
+    Route::get('/urls/{id}/share', 'UrlsController@share')->name('share');
 
 });
