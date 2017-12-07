@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Url;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Request;
+
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +16,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
     ];
 
     /**
@@ -39,6 +42,8 @@ class Handler extends ExceptionHandler
         parent::report($exception);
     }
 
+
+
     /**
      * Render an exception into an HTTP response.
      *
@@ -48,6 +53,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($this->isHttpException($exception))
+        {
+            if($exception->getStatusCode() == 404) {
+                $url = Url::redirect($request);
+                if ($url) {
+                    return redirect($url->origin);
+                }
+                else {
+                    return redirect('/');
+                }
+            }
+        }
         return parent::render($request, $exception);
     }
 }

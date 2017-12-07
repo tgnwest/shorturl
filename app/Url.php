@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class Url extends Model
@@ -141,6 +142,16 @@ class Url extends Model
             $url->save();
             return 'shared';
         }
+    }
+
+    public static function redirect(Request $request)
+    {
+        $short = substr(parse_url($request->url())['path'], 1);
+        $url = Url::where('short', $short)->first();
+        if (!$url)
+            return false;
+        else
+            return $url;
     }
 
 }

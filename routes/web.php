@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::get('/', 'UrlsController@home')->name('index');
 
+Route::get('/*', 'UrlsController@redirect')->name('redirect');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/urls', 'UrlsController@index')->name('home');

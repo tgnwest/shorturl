@@ -77,10 +77,21 @@ class UrlsController extends Controller
         return back()->with('status', 'Url successfully deleted!');
     }
 
+    /**
+     * Share or hidden url on index page
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function share($id)
     {
         $msg = $this->url->shareUrl($id);
         return back()->with('status', 'Url successfully '.$msg);
+    }
+
+    public static function redirect()
+    {
+        dd('sdfsdf');
     }
 
 }
